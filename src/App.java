@@ -5,17 +5,17 @@ import java.util.Map;
 
 import Model.Cell;
 import Model.Maze;
-import controllers.MazeSolver;
-import controllers.MazeSolverRecursive;
+import controllers.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
         runEjerciciosFibonacci();
-        runMaze();
+        runMazeBoolean();
+        runMazeCell(); 
     }
 
     private static void runEjerciciosFibonacci() {
-        int n = 50; 
+        int n = 50;
         System.out.println("Ejercicio fibonacci recursivo");
         long start = System.nanoTime();
         long resultado = getFibonacci(n);
@@ -49,7 +49,8 @@ public class App {
         return result;
     }
 
-    private static void runMaze() {
+    private static void runMazeBoolean() {
+        System.out.println("\n----ejercicio----");
         boolean[][] predefineMaze = {
             {true, true, true, true},
             {false, true, true, true},
@@ -58,15 +59,43 @@ public class App {
         };
 
         Maze maze = new Maze(predefineMaze);
-        System.out.println("\nLaberinto cargado:");
         maze.printMaze();
 
         Cell start = new Cell(0, 0);
         Cell end = new Cell(3, 3);
-        List<MazeSolver> solvers = Arrays.asList(new MazeSolverRecursive());
-
-        MazeSolver solver = solvers.get(0);
+        MazeSolver solver = new MazeSolverRecursive();
         List<Cell> path = solver.getPath(maze.getMaze(), start, end);
+
+        System.out.println("Camino encontrado:");
+        for (Cell cell : path) {
+            System.out.println(cell);
+        }
+    }
+
+    private static void runMazeCell() {
+        System.out.println("\n-----ejercicio------");
+        boolean[][] predefineMaze = {
+            {true, true, true, true},
+            {false, true, true, true},
+            {true, true, false, false},
+            {true, true, true, true}
+        };
+
+        int rows = predefineMaze.length;
+        int cols = predefineMaze[0].length;
+        Cell[][] cellMaze = new Cell[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cellMaze[i][j] = new Cell(i, j);
+                cellMaze[i][j].setWalkable(predefineMaze[i][j]);
+            }
+        }
+
+        Cell start = new Cell(0, 0);
+        Cell end = new Cell(3, 3);
+        MazeSolverRecursivoCompletoBT fullSolver = new MazeSolverRecursivoCompletoBT();
+        List<Cell> path = fullSolver.solve(cellMaze, start, end);
 
         System.out.println("Camino encontrado:");
         for (Cell cell : path) {

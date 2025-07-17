@@ -29,8 +29,6 @@ public class MazeSolverRecursive implements MazeSolver {
             path.add(start);
             return true;
         }
-
-        // Marca como visitado
         grid[row][col] = false;
 
         if(findPath(grid, new Cell(row + 1, col), end, path) ||
