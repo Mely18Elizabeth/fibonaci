@@ -1,0 +1,1 @@
+![captura](ter.png)
