@@ -16,13 +16,12 @@ public class App {
 
     private static void runEjerciciosFibonacci() {
         int n = 50; 
-
         System.out.println("Ejercicio fibonacci recursivo");
         long start = System.nanoTime();
         long resultado = getFibonacci(n);
         long end = System.nanoTime();
         long duration = end - start;
-        System.out.println("Resultado: " + resultado + " en tiempo = " + duration + " ns (" + (duration / 1e9) + " segundos)");
+        System.out.println("Resultado: " + resultado + " en tiempo = " + duration + " ns ( " + (duration / 1e9) + " segundos)");
 
         System.out.println("Ejercicio fibonacci recursivo con PD");
         start = System.nanoTime();
